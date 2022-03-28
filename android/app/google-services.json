@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "107039207150",
+    "project_id": "chat-application-54251",
+    "storage_bucket": "chat-application-54251.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107039207150:android:850326edc8543d24330dff",
+        "android_client_info": {
+          "package_name": "mz.com.edilson.chat_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107039207150-8qairrguln875j1evtj5v4od5e2n9vg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHR2Ch8pHI1DledBatzTGHMwlZbttWfAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107039207150-8qairrguln875j1evtj5v4od5e2n9vg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
