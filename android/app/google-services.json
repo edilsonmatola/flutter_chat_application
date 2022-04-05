@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "107039207150",
-    "project_id": "chat-application-54251",
-    "storage_bucket": "chat-application-54251.appspot.com"
+    "project_number": "10401069977",
+    "project_id": "chat-app-5d8bc",
+    "storage_bucket": "chat-app-5d8bc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:107039207150:android:850326edc8543d24330dff",
+        "mobilesdk_app_id": "1:10401069977:android:b335918e108393c034f108",
         "android_client_info": {
           "package_name": "mz.com.edilson.chat_application"
         }
       },
       "oauth_client": [
         {
-          "client_id": "107039207150-8qairrguln875j1evtj5v4od5e2n9vg4.apps.googleusercontent.com",
+          "client_id": "10401069977-8vohtevjqkucc83i8rb5nbm3o2ik2ooq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mz.com.edilson.chat_application",
+            "certificate_hash": "fa276db941ffa7b30263d8c08a1ab5dbc5e29137"
+          }
+        },
+        {
+          "client_id": "10401069977-fsmtlp2imk9r85pv1f032hlm92amkpdk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHR2Ch8pHI1DledBatzTGHMwlZbttWfAY"
+          "current_key": "AIzaSyAxiLaKougUyMvD2kZtGp8SEyY_1zpCmP4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "107039207150-8qairrguln875j1evtj5v4od5e2n9vg4.apps.googleusercontent.com",
+              "client_id": "10401069977-fsmtlp2imk9r85pv1f032hlm92amkpdk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
