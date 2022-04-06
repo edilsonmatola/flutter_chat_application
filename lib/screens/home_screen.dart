@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../models/user_model.dart';
+import 'sign_in_screen.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key, required this.user}) : super(key: key);
+
+  final UserModel user;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -19,7 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              await Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SignInScreen(),
+                ),
+                (route) => false,
+              );
+            },
             icon: const Icon(
               Icons.logout_rounded,
             ),
