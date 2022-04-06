@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../main.dart';
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
@@ -38,8 +40,10 @@ class _SignInScreenState extends State<SignInScreen> {
           duration: Duration(
             seconds: 3,
           ),
-          content: Text(
-            'User Already exists',
+          content: Center(
+            child: Text(
+              'User Already exists',
+            ),
           ),
         ),
       );
@@ -54,6 +58,14 @@ class _SignInScreenState extends State<SignInScreen> {
         },
       );
     }
+
+    await Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyApp(),
+      ),
+      (route) => false,
+    );
   }
 
   late double deviceWidth = MediaQuery.of(context).size.width;
