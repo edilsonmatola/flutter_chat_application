@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../models/user_model.dart';
+import 'chat_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({Key? key, required this.user}) : super(key: key);
@@ -120,7 +121,24 @@ class _SearchScreenState extends State<SearchScreen> {
                         searchResult[index]['email'] as String,
                       ),
                       trailing: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            searchController.text = '';
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChatScreen(
+                                currentUser: widget.user,
+                                friendId: searchResult[index]['uid'] as String,
+                                friendName:
+                                    searchResult[index]['name'] as String,
+                                friendImage:
+                                    searchResult[index]['image'] as String,
+                              ),
+                            ),
+                          );
+                        },
                         icon: const Icon(
                           Icons.message_outlined,
                         ),
