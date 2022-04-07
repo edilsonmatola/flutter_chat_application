@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -87,9 +88,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        leading: CircleAvatar(
-                          child: Image.network(
-                            friend['image'] as String,
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(80),
+                          child: CachedNetworkImage(
+                            height: 50,
+                            imageUrl: friend['image'] as String,
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.error_outline,
+                            ),
                           ),
                         ),
                         title: Text(

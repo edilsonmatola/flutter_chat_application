@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,15 @@ class ChatScreen extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(80),
-              child: Image.network(
-                friendImage,
-                height: 35,
+              child: CachedNetworkImage(
+                height: 40,
+                imageUrl: friendImage,
+                placeholder: (context, url) => CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error_outline,
+                ),
               ),
             ),
             SizedBox(
