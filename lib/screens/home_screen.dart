@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/user_model.dart';
+import 'chat_screen.dart';
 import 'search_screen.dart';
 import 'sign_in_screen.dart';
 
@@ -43,6 +45,79 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(widget.user.uid)
+            .collection('messages')
+            .snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text(
+                  'No Chats Available',
+                ),
+              );
+            }
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final friendId = snapshot.data!.docs[index].id;
+                final lastMessage = snapshot.data!.docs[index]['last_message'];
+                return FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(friendId)
+                      .get(),
+                  builder: (context, AsyncSnapshot asyncSnapshot) {
+                    if (asyncSnapshot.hasData) {
+                      final friend = asyncSnapshot.data;
+                      return ListTile(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatScreen(
+                              currentUser: widget.user,
+                              friendId: friend['uid'] as String,
+                              friendName: friend['userName'] as String,
+                              friendImage: friend['image'] as String,
+                            ),
+                          ),
+                        ),
+                        leading: CircleAvatar(
+                          child: Image.network(
+                            friend['image'] as String,
+                          ),
+                        ),
+                        title: Text(
+                          friend['userName'] as String,
+                        ),
+                        subtitle: Text(
+                          '$lastMessage',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      );
+                    }
+                    return LinearProgressIndicator(
+                      color: Colors.white,
+                    );
+                  },
+                );
+              },
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
