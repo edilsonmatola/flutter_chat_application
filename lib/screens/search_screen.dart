@@ -28,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
     await FirebaseFirestore.instance
         .collection('users')
         .where(
-          'name',
+          'userName',
           isEqualTo: searchController.text,
         )
         .get()
@@ -41,10 +41,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 seconds: 3,
               ),
               elevation: 2,
-              content: Center(
-                child: Text(
-                  'No users found',
-                ),
+              content: Text(
+                'No users found',
               ),
             ),
           );
@@ -75,86 +73,84 @@ class _SearchScreenState extends State<SearchScreen> {
           'Search your friends',
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: TextField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        hintText: 'Type username',
-                        filled: true,
-                        suffixIcon: IconButton(
-                          onPressed: onSearch,
-                          icon: const Icon(
-                            Icons.search_outlined,
-                          ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: 'Type username',
+                      filled: true,
+                      suffixIcon: IconButton(
+                        onPressed: onSearch,
+                        icon: const Icon(
+                          Icons.search_outlined,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-            if (searchResult.isNotEmpty)
-              Expanded(
-                child: ListView.builder(
-                  itemCount: searchResult.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        child: Image.network(
-                          searchResult[index]['image'] as String,
-                        ),
+              ),
+            ],
+          ),
+          if (searchResult.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                itemCount: searchResult.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      child: Image.network(
+                        searchResult[index]['image'] as String,
                       ),
-                      title: Text(
-                        searchResult[index]['name'] as String,
-                      ),
-                      subtitle: Text(
-                        searchResult[index]['email'] as String,
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            searchController.text = '';
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChatScreen(
-                                currentUser: widget.user,
-                                friendId: searchResult[index]['uid'] as String,
-                                friendName:
-                                    searchResult[index]['name'] as String,
-                                friendImage:
-                                    searchResult[index]['image'] as String,
-                              ),
+                    ),
+                    title: Text(
+                      searchResult[index]['userName'] as String,
+                    ),
+                    subtitle: Text(
+                      searchResult[index]['email'] as String,
+                    ),
+                    trailing: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          searchController.text = '';
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatScreen(
+                              currentUser: widget.user,
+                              friendId: searchResult[index]['uid'] as String,
+                              friendName:
+                                  searchResult[index]['userName'] as String,
+                              friendImage:
+                                  searchResult[index]['image'] as String,
                             ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.message_outlined,
-                        ),
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.message_outlined,
                       ),
-                    );
-                  },
-                ),
-              )
-            else if (isLoading == true)
-              Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              )
-          ],
-        ),
+                    ),
+                  );
+                },
+              ),
+            )
+          else if (isLoading == true)
+            Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            )
+        ],
       ),
     );
   }
