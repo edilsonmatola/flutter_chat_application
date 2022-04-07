@@ -24,15 +24,19 @@ class _MessageTextFieldState extends State<MessageTextField> {
         children: [
           Expanded(
             child: TextField(
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
               controller: _textController,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[100],
-                labelText: 'Write a message',
+                hintText: 'Write a message',
+                hintStyle: TextStyle(
+                  color: Colors.grey[400],
+                  fontSize: 16,
+                ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 0,
-                  ),
+                  borderSide: BorderSide.none,
                   gapPadding: 10,
                   borderRadius: BorderRadius.circular(25),
                 ),
@@ -40,73 +44,78 @@ class _MessageTextFieldState extends State<MessageTextField> {
             ),
           ),
           SizedBox(
-            width: 20,
+            width: 2,
           ),
-          IconButton(
-            onPressed: () async {
-              final message = _textController.text;
-              _textController.clear();
-              await FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(widget.currentId)
-                  .collection('messages')
-                  .doc(widget.friendId)
-                  .collection('chats')
-                  .add(
-                {
-                  'senderId': widget.currentId,
-                  'receiverId': widget.friendId,
-                  'message': message,
-                  'type': 'text',
-                  'dateTime': DateTime.now(),
-                },
-              ).then(
-                (value) => {
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(widget.currentId)
-                      .collection('messages')
-                      .doc(widget.friendId)
-                      .set(
-                    {
-                      'last_message': message,
-                    },
-                  )
-                },
-              );
+          SizedBox(
+            child: IconButton(
+              onPressed: () async {
+                final message = _textController.text;
+                if (message.isEmpty) {
+                  return;
+                }
+                _textController.clear();
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.currentId)
+                    .collection('messages')
+                    .doc(widget.friendId)
+                    .collection('chats')
+                    .add(
+                  {
+                    'senderId': widget.currentId,
+                    'receiverId': widget.friendId,
+                    'message': message,
+                    'type': 'text',
+                    'dateTime': DateTime.now(),
+                  },
+                ).then(
+                  (value) => {
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(widget.currentId)
+                        .collection('messages')
+                        .doc(widget.friendId)
+                        .set(
+                      {
+                        'last_message': message,
+                      },
+                    )
+                  },
+                );
 
-              await FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(widget.friendId)
-                  .collection('messages')
-                  .doc(widget.currentId)
-                  .collection('chats')
-                  .add(
-                {
-                  'senderId': widget.currentId,
-                  'receiverId': widget.friendId,
-                  'message': message,
-                  'type': 'text',
-                  'dateTime': DateTime.now(),
-                },
-              ).then(
-                (value) => {
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(widget.friendId)
-                      .collection('messages')
-                      .doc(widget.currentId)
-                      .set(
-                    {
-                      'last_message': message,
-                    },
-                  ),
-                },
-              );
-            },
-            icon: const Icon(
-              Icons.send_outlined,
-              color: Colors.black,
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.friendId)
+                    .collection('messages')
+                    .doc(widget.currentId)
+                    .collection('chats')
+                    .add(
+                  {
+                    'senderId': widget.currentId,
+                    'receiverId': widget.friendId,
+                    'message': message,
+                    'type': 'text',
+                    'dateTime': DateTime.now(),
+                  },
+                ).then(
+                  (value) => {
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(widget.friendId)
+                        .collection('messages')
+                        .doc(widget.currentId)
+                        .set(
+                      {
+                        'last_message': message,
+                      },
+                    ),
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.send_outlined,
+                color: Colors.black,
+              ),
             ),
           ),
         ],
