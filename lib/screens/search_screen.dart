@@ -69,8 +69,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(36, 35, 49, 1),
         title: Text(
-          'Search your friends',
+          'Chat with your friends',
         ),
       ),
       body: Column(
@@ -81,6 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: TextField(
+                    onSubmitted: (value) => onSearch(),
                     controller: searchController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(

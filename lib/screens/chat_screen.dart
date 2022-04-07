@@ -24,7 +24,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: const Color.fromRGBO(36, 35, 49, 1),
         title: Row(
           children: [
             ClipRRect(
@@ -32,7 +32,7 @@ class ChatScreen extends StatelessWidget {
               child: CachedNetworkImage(
                 height: 40,
                 imageUrl: friendImage,
-                placeholder: (context, url) => CircularProgressIndicator(
+                placeholder: (context, url) => const CircularProgressIndicator(
                   color: Colors.white,
                 ),
                 errorWidget: (context, url, error) => const Icon(
@@ -41,13 +41,14 @@ class ChatScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 10,
+              width: 20,
             ),
             Text(
               friendName,
               style: TextStyle(
                 fontSize: 20,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -56,7 +57,7 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
