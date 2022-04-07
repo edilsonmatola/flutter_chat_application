@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/user_model.dart';
+import 'search_screen.dart';
 import 'sign_in_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () async {
+              await GoogleSignIn().signOut();
               await FirebaseAuth.instance.signOut();
               await Navigator.pushAndRemoveUntil(
                 context,
@@ -43,7 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchScreen(
+                user: widget.user,
+              ),
+            ),
+          );
+        },
         child: const Icon(
           Icons.search_outlined,
         ),
