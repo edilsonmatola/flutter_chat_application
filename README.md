@@ -31,10 +31,12 @@ cd flutter_chat_application
 ```
 
 3. Create Firebase Project
-   ⚠️ When registering your app make sure to insert the **Debug signing certificate SHA-1**
+
+⚠️ When registering your app make sure to insert the **Debug signing certificate SHA-1**
+
 4. Enable Auth with Google (in Additional Providers)
-5. Make Firestore Rules
-6. Create Android & iOS apps
+6. Make Firestore Rules
+7. Create Android & iOS apps
 
 ##### 7. To run the app, simply write the following commands:
 
