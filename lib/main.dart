@@ -4,9 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'app/features/authentication/presentation/sign_in_screen/sign_in_screen.dart';
 import 'models/user_model.dart';
 import 'screens/home_screen.dart';
-import 'screens/sign_in_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
