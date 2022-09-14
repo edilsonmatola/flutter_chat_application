@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // * Cancel button
           TextButton(
             style: TextButton.styleFrom(
-              primary: Colors.black,
+              foregroundColor: Colors.black,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // * Sign out
           TextButton(
             style: TextButton.styleFrom(
-              primary: Colors.red,
+              foregroundColor: Colors.red,
             ),
             onPressed: () async {
               Navigator.of(context).pop();

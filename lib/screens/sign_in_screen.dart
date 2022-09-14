@@ -106,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    primary: Colors.black,
+                    backgroundColor: Colors.black,
                   ),
                   onPressed: () async {
                     await signInUser();
