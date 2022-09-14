@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../app/constants/constants_export.dart';
 import '../models/user_model.dart';
 import 'chat_screen.dart';
 import 'search_screen.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(36, 35, 49, 1),
+        backgroundColor: AppColors.backgroundColor,
         title: Text(
           'ChatApp',
         ),
@@ -147,8 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void showSignOutConfirmation() {
-    showDialog(
+  Future<void> showSignOutConfirmation() async {
+    await showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../app/constants/constants_export.dart';
 import '../models/user_model.dart';
 import 'chat_screen.dart';
 
@@ -69,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(36, 35, 49, 1),
+        backgroundColor: AppColors.backgroundColor,
         title: Text(
           'Chat with your friends',
         ),
