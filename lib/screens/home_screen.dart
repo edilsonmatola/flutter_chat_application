@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../app/constants/constants_export.dart';
+import '../app/features/authentication/presentation/sign_in_screen/sign_in_screen.dart';
 import '../models/user_model.dart';
 import 'chat_screen.dart';
 import 'search_screen.dart';
-import 'sign_in_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.user}) : super(key: key);
